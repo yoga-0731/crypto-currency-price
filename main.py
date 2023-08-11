@@ -1,8 +1,11 @@
 import requests
+import os
 from flask import Flask, render_template, request
 import json
 
 app = Flask(__name__)
+
+API_KEY = os.environ.get('API_KEY')
 
 
 @app.route('/')
@@ -17,7 +20,8 @@ def get_price():
         currencies = request.form.get('currency')
         parameters = {
             "fsym": crypto_symbol,
-            "tsyms": currencies
+            "tsyms": currencies,
+            "api_key": API_KEY
         }
 
         response = requests.post(url="https://min-api.cryptocompare.com/data/price", params=parameters)
