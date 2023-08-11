@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto currrency values</title>
+    <style>
+        input {
+            margin-bottom: 20px
+        }
+        p {
+            font-size: 20px
+        }
+    </style>
+</head>
+    <body>
+        <h1>Check any Crypto currency price</h1>
+        <form action="{{ url_for('get_price') }}" method="post">
+            <input type="text" placeholder="Enter Crypto symbol" name="crypto"><br/>
+            <input type="text" placeholder="Enter currency symbols as comma separated values (Ex: USD,EUR)" size="60" name="currency"><br/>
+            <button type="submit">Get Price!</button>
+        </form>
+        {% if crypto_symbol %}
+            <p><b><u>Price of {{ crypto_symbol }}</u></b></p>
+            {% for key in result %}
+                <p>{{ key }}: {{ result[key] }}</p>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>
